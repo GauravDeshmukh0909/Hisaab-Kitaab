@@ -13,6 +13,7 @@ export const getAllContacts = query({
 
     /* ── personal expenses where YOU are the payer ─────────────────────── */
     const expensesYouPaid = await ctx.db
+    
       .query("expenses")
       .withIndex("by_user_and_group", (q) =>
         q.eq("paidByUserId", currentUser._id).eq("groupId", undefined)
