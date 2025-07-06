@@ -1,16 +1,18 @@
 import { serve } from "inngest/next";
 import { inngest } from "@/lib/inngest/client";
-import { helloWorld } from "@/lib/inngest/functions";
-// import { paymentReminders } from "@/lib/inngest/payment-reminders";
+import { paymentReminders } from "@/lib/inngest/payment-reminders.js";
+import { spendingInsights } from "@/lib/inngest/spending-insights";
+
+
 // import { spendingInsights } from "@/lib/inngest/spending-insights";
 
 // Create an API that serves zero functions
 export const { GET, POST, PUT } = serve({
   client: inngest,
   functions: [
-    helloWorld,
+    
     /* your functions will be passed here later! */
-    // spendingInsights,
-    // paymentReminders,
+    spendingInsights,
+    paymentReminders,
   ],
 });

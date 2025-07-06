@@ -4,16 +4,15 @@ import { v } from "convex/values";
 import { internal } from "./_generated/api";
 
 /* ──────────────────────────────────────────────────────────────────────────
-   1. getAllContacts – 1‑to‑1 expense contacts + groups
+   1. getContacts – 1‑to‑1 expense contacts + groups (renamed from getAllContacts)
    ──────────────────────────────────────────────────────────────────────── */
-export const getAllContacts = query({
+export const getContacts = query({
   handler: async (ctx) => {
     // Use the centralized getCurrentUser instead of duplicating auth logic
     const currentUser = await ctx.runQuery(internal.users.getCurrentUser);
 
     /* ── personal expenses where YOU are the payer ─────────────────────── */
     const expensesYouPaid = await ctx.db
-    
       .query("expenses")
       .withIndex("by_user_and_group", (q) =>
         q.eq("paidByUserId", currentUser._id).eq("groupId", undefined)
